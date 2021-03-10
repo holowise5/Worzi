@@ -1,2 +1,3 @@
 # Worzi
-Web application for time management and agile planning
+Web application for time management and agile planning.
+

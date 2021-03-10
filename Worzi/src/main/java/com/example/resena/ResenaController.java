@@ -28,20 +28,6 @@ public class ResenaController {
     @Autowired
     private ProductoRepository productoRepository;
 
-    @PostMapping("/productos/{id}/nuevaResena")
-    public String linkTowriteResena(Model model, @PathVariable long id, @RequestParam String reviewText) {
-        List<Usuario> users = usuarioRepository.findAll();
-        Usuario user = users.get(0);//Prueba
-        LocalDate localDate = java.time.LocalDate.now();
-        Date fecha = java.sql.Date.valueOf(localDate);
-
-        Optional<Producto> producto = productoRepository.findById(id);
-
-        Resena resena = new Resena(producto.get(), user, fecha, reviewText);
-        resenaRepository.save(resena);
-
-        model.addAttribute("id", id);
-        return "resenaAgregada";
-    }
+   
 
 }

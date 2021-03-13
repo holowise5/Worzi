@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Worzii</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.Div1{
+	background-color: lightblue;
+    text-color: #000066;
+    text-align: center;
+    font-size: 20px;
+    font-family: Verdana, sans-serif;
+	padding: 1px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #444;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #3ca1c3;
+}
+
+.Activa {
+  background-color: lightblue;
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="Div1">
+	<h1>Worzii</h1>
+</div>
+<ul>
+  <li><a class="Activa" href="#Inicio">Inicio</a></li>
+  <li><a href="#Tableros">Mis Tableros</a></li>
+  <li><a href="#Config">Configuración</a></li>
+  <li style="float:right"><a href="#Perfil">Perfil</a></li>
+  <li><a href="crearTarjeta">Crear tarjeta</a></li>
+</ul>
+
+  
+
+
+	<div class="row">
+
+		<div class="column">
+			
+			{{#tarjeta}}
+			<div class="card"><h1>{{tarjeta.nombre}}</h1></div>
+				
+			
+
+			<div class="card">Fecha límite: {{tarjeta.fecha}}</div>
+			
+			<div class="card">Descripción: <br>{{tarjeta.descripcion}}</div>
+			
+			<div class="cardFondo " style="color:black"><p>Borrar tarjeta</p></div>
+		</div>
+		{{/tarjeta}}
+	</div>
+
+		
+</body>
+</html>
+

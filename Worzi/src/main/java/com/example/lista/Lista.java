@@ -4,8 +4,6 @@ import com.example.pedido.Pedido;
 import com.example.resena.Resena;
 import com.example.tablero.Tablero;
 
-import Tarjeta.Tarjeta;
-
 import javax.persistence.*;
 
 import java.util.ArrayList;

@@ -1,8 +1,6 @@
 package com.example.lista;
 
-import com.example.pedido.Pedido;
-import com.example.resena.Resena;
-import com.example.tablero.Tablero;
+import com.example.tarjeta.*;
 
 import javax.persistence.*;
 
@@ -15,31 +13,23 @@ public class Lista {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-    @Column(unique = true)
-    private String nombreUsuario;
-
-    @Column(unique = true)
-    private String email;
-
-
-    private String contrasenya;
     
-    private boolean Admin;
-    private ArrayList<Tarjeta> lista = new ArrayList<>();
+    private String nombre;
     
+    // Relacion bidireccional: las tarjetas van a saber a qué lista pertenecen,
+    // para poderlas mover de una lista a otra pinchando en la tarjeta
+ 	@OneToMany(mappedBy = "listaAsociada", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tarjeta> tarjetas;
+     
+ 	
+ 	// Constructor
+    public Lista(String nombre) {
+		super();
+		this.nombre = nombre;
+		this.tarjetas = new ArrayList<Tarjeta>();
+	}
 
-
-    protected Lista() {
-    }
-
-    public Lista(String nombreUsuario, String email, String contrasenya) {
-        this.nombreUsuario = nombreUsuario;
-        this.email = email;
-        this.contrasenya = contrasenya;
-    }
-
-    public long getId() {
+	public long getId() {
         return id;
     }
 
@@ -47,49 +37,56 @@ public class Lista {
         this.id = id;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-  
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public List<Tarjeta> getTarjetas() {
+		return tarjetas;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setTarjetas(List<Tarjeta> tarjetas) {
+		this.tarjetas = tarjetas;
+	}
 
-    public String getContrasenya() {
-        return contrasenya;
-    }
+	// Metodo sobrecargado que permite obtener una tarjeta por su indice o directamente encontrando ese objeto 'Tarjeta'
+	public Tarjeta getTarjeta(int index) {
+		return this.tarjetas.get(index);
+	}
 
-    public void setContrasenya(String contrasenya) {
-        this.contrasenya = contrasenya;
-    }
+	// Busca esa tarjeta en el ArrayList de tarjetas de la lista actual. Si no la encuentra, devuelve un null.
+	public Tarjeta getTarjeta(Tarjeta t) {
+		for (Tarjeta tarjeta: tarjetas) {
+			if (tarjeta==t) {
+				return tarjeta;
+			}
+		}
+		return null;
+	}
 
-   
+	// Metodo que añade una tarjeta al ArrayList, devuelve true si lo ha conseguido
+	public boolean addTarjeta(Tarjeta t) {
+		return this.tarjetas.add(t);
+	}
 
-    /*
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
+	// Metodo que borra una tarjeta asociada a la lista. Sobrecargado.
+	// Si la consigue borrar, devuelve el objeto lista. Si no lo consigue, devuelve null.
+	public Tarjeta removeTarjeta(int index) {
+		return this.tarjetas.remove(index);
+	}
+	
+	// Si la consigue borrar, devuelve true. Si no lo consigue, devuelve false.
+	public boolean removeTarjeta(Tarjeta t) {
+		return this.tarjetas.remove(t);
+	}
+	
+	// Devuelve cuántas tarjetas tiene dentro la lista en este momento
+	public int size() {
+		return this.tarjetas.size();
+	}
 
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
-
-    public void anyadirPedido(Pedido pedido) {
-        this.pedidos.add(pedido);
-    }
-
-    public void eliminarPeido(Pedido pedido) {
-        this.pedidos.remove(pedido);
-    }
-*/
-  
 }

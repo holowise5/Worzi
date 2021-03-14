@@ -1,12 +1,8 @@
 package com.example.usuario;
 
-import com.example.pedido.Pedido;
-import com.example.resena.Resena;
-import com.example.tablero.Tablero;
-
-import net.bytebuddy.asm.Advice.Return;
-
 import javax.persistence.*;
+
+import com.example.tablero.Tablero;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +24,25 @@ public class Usuario {
 
 	private boolean admin;
 	
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	// Relacion bidireccional: el tablero tambien va a saber a que usuario pertenece
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Tablero> tableros;
 
-	protected Usuario() {
-	}
-
+	
+	// Constructores
 	public Usuario(String nombreUsuario, String email, String contrasenya) {
 		this.nombreUsuario = nombreUsuario;
 		this.email = email;
 		this.contrasenya = contrasenya;
-		this.setNotAdmin();
+		this.setAdmin(false);			// Si en la creacion no se indica nada, por defecto el usuario no es admin
+		this.tableros = new ArrayList<Tablero>();
+	}
+	
+	public Usuario(String nombreUsuario, String email, String contrasenya, boolean admin) {
+		this.nombreUsuario = nombreUsuario;
+		this.email = email;
+		this.contrasenya = contrasenya;
+		setAdmin(admin);
 		this.tableros = new ArrayList<Tablero>();
 	}
 
@@ -78,16 +82,16 @@ public class Usuario {
 		return admin;
 	}
 
-	public void setAdmin() {
-		this.admin = true;
-	}
-	
-	public void setNotAdmin() {
-		this.admin = false;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 	
 	public List<Tablero> getTableros(){
 		return tableros;
+	}
+	
+	public void setTableros(List<Tablero> tableros) {
+		this.tableros = tableros;
 	}
 	
 	// Metodo sobrecargado que permite obtener un tablero por su indice o directamente encontrando ese objeto en la lista
@@ -105,12 +109,12 @@ public class Usuario {
 		return null;
 	}
 	
-	// Metodo que añade un tablero a la lista de tableros, devuelve true si lo ha conseguido
+	// Metodo que añade un tablero al ArrayList de tableros, devuelve true si lo ha conseguido
 	public boolean addTablero(Tablero t) {
 		return this.tableros.add(t);
 	}
 	
-	// Metodo que borra un tablero de la lista de tablero. Sobrecargado.
+	// Metodo que borra un tablero del ArrayLst de tablero. Sobrecargado.
 	// Si lo consigue borrar, devuelve el tablero. Si no lo consigue, devuelve null.
 	public Tablero removeTablero(int index) {
 		return this.tableros.remove(index);

@@ -1,13 +1,19 @@
 package com.example.tablero;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.example.lista.Lista;
+import com.example.tarjeta.Tarjeta;
+import com.example.usuario.Usuario;
 
 @Entity
 public class Tablero {
@@ -16,20 +22,31 @@ public class Tablero {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 	
+	@Column(unique = true)
 	private String nombre;
+	
 	private boolean simple;
 	private String fondo;
 	private String descripcion;
 	
-	private ArrayList<Lista> tablero = new ArrayList<>();
+	// El tablero sí que sabe qué usuario es su dueño (posteriormente tal vez añadamos usuarios 'invitados')
+	@ManyToOne
+	private Usuario owner;
+	
+	// Relacion unidireccional: las listas no necesitan saber a qué tablero pertenecen
+	@OneToMany(orphanRemoval = true)
+	private List<Lista> listas;
 	 
-	public Tablero(long id, String nombre, boolean simple, String fondo, String descripcion) {
+	//Constructor
+	public Tablero(long id, String nombre, boolean simple, String fondo, String descripcion, Usuario creador) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.simple = simple;
 		this.fondo = fondo;
 		this.descripcion = descripcion;
+		this.owner = creador;
+		this.listas = new ArrayList<Lista>();
 	}
 
 	public String getNombre() {
@@ -63,13 +80,65 @@ public class Tablero {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
-	public ArrayList<Lista> getTablero() {
-		return tablero;
+	
+	public Usuario getOwner() {
+		return this.owner;
 	}
 
-	public void setTablero(ArrayList<Lista> tablero) {
-		this.tablero = tablero;
+	public void setOwner(Usuario owner) {
+		this.owner = owner;
+	}
+	
+	public List<Lista> getListas() {
+		return this.listas;
+	}
+
+	public void setListas(List<Lista> listas) {
+		this.listas = listas;
+	}
+	
+	// Metodo sobrecargado que permite obtener una lista por su indice o directamente encontrando ese objeto 'Lista'
+	public Lista getLista(int index) {
+		return this.listas.get(index);
+	}
+	
+	// Busca esa lista en el ArrayList de listas del tablero. Si no la encuentra, devuelve un null.
+	public Lista getLista(Lista l) {
+		for (Lista lista: listas) {
+			if (lista==l) {
+				return lista;
+			}
+		}
+		return null;
+	}
+	
+	// Metodo que añade una lista al ArrayList, devuelve true si lo ha conseguido
+	public boolean addLista(Lista l) {
+		return this.listas.add(l);
+	}
+	
+	// Metodo que borra una lista asociada. Sobrecargado.
+	// Si la consigue borrar, devuelve el objeto lista. Si no lo consigue, devuelve null.
+	public Lista removeLista(int index) {
+		return this.listas.remove(index);
+	}
+	// Si la consigue borrar, devuelve true. Si no lo consigue, devuelve false.
+	public boolean removeLista(Lista l) {
+		return this.listas.remove(l);
+	}
+	
+	// Para tableros con varias listas,
+	// este metodo permite cambiar una tarjeta de una lista a otra.
+	// Devuelve false si no lo ha conseguido
+	public boolean moveTarjeta(Tarjeta t, Lista destino) {
+	
+		Lista origen = t.getListaAsociada();
+		origen.removeTarjeta(t);
+		t.cambiarLista(destino);
+		destino.addTarjeta(t);
+		
+		
+		return false;
 	}
 	
 	

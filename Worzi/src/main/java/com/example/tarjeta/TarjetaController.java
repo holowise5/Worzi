@@ -36,7 +36,7 @@ public class TarjetaController {
 	        model.addAttribute("nombre",nombre);
 	        model.addAttribute("fecha", fecha);
 	        model.addAttribute("descripcion", descripcion);
-	       new Tarjeta(nombre, fecha, descripcion);
+//	       new Tarjeta(nombre, fecha, descripcion, lista);
 	        
 	        return "main";
 	    }

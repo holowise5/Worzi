@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ListaRepository extends JpaRepository<Lista, Long> {
 
-    Lista findByNombreUsuario(String nombreLista);
+    Lista findByNombre(String nombreLista);
 
    
 

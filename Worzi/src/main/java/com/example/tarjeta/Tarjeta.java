@@ -73,11 +73,11 @@ public class Tarjeta {
 		this.nombre = nombre;
 	}
 
-	public String getFechaVencimiento() {
+	public String getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaVencimiento(String fecha) {
+	public void setFechaFin(String fecha) {
 		this.fechaFin = fecha;
 	}
 

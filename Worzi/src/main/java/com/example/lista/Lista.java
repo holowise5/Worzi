@@ -88,5 +88,12 @@ public class Lista {
 	public int size() {
 		return this.tarjetas.size();
 	}
+	
+	public Tarjeta getAll() {
+		for (Tarjeta tarjeta: tarjetas) {
+				return tarjeta;
+			}
+		return null;
+	}
 
 }

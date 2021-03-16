@@ -3,7 +3,9 @@ Web application for time management and agile planning.
 
 ## Uso del ejecutable
 
-En la carpeta del proyecto se encuentra el .jar. Al ejecutarlo, se tiene que abrir el navegador y poner la dirección http://localhost8080/ 
+- Ejecutar archivo .jar en la carpeta del proyecto.
+
+- Abrir el navegador con la dirección http://localhost8080/ 
 
 ## Componentes del grupo: 
 

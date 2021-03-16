@@ -13,8 +13,6 @@ import com.example.lista.Lista;
 import com.example.lista.ListaRepository;
 
 
-
-
 @Controller
 public class TarjetaController {
 int numeroLista = 1;

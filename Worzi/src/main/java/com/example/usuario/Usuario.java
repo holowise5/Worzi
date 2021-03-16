@@ -30,6 +30,9 @@ public class Usuario {
 
 	
 	// Constructores
+	public Usuario() {
+	}
+	
 	public Usuario(String nombreUsuario, String email, String contrasenya) {
 		super();
 		this.nombreUsuario = nombreUsuario;

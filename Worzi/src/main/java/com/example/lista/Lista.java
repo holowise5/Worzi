@@ -23,6 +23,9 @@ public class Lista {
      
  	
  	// Constructor
+ 	public Lista() {
+ 	} 	
+ 	
     public Lista(String nombre) {
 		super();
 		this.nombre = nombre;

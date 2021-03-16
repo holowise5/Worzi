@@ -24,6 +24,9 @@ public class Tarjeta {
     private String descripcion;
 
     // Constructores
+    public Tarjeta() {
+    }
+    
 	public Tarjeta(String nombre, String fecha, String color, String descripcion) {
 		super();
 		this.nombre = nombre;

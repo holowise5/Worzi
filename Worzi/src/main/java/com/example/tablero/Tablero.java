@@ -38,6 +38,10 @@ public class Tablero {
 	private List<Lista> listas;
 	 
 	//Constructor
+	public Tablero() {
+		super();
+	}
+	
 	public Tablero(String nombre, boolean simple, String fondo, String descripcion, Usuario creador) {
 		super();
 		this.nombre = nombre;

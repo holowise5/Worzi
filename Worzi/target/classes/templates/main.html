@@ -107,14 +107,15 @@ li a:hover:not(.active) {
   <li><a class="Activa" href="#Inicio">Inicio</a></li>
   <li><a href="#Tableros">Mis Tableros</a></li>
   <li><a href="#Config">Configuración</a></li>
+  <li style="float:right"><a href="/perfil">Hola, {{usu.nombreUsuario}}</a></li>
   <li style="float:right"><a href="/perfil">Perfil</a></li>
   <li><a href="crearTarjeta">Crear tarjeta</a></li>
-  <li><a href="crearTarjeta">Crear Lista</a></li>
+  <li><a href="crearLista">Crear Lista</a></li>
 </ul>
 
   
-
-
+	<p><h1>Tablero de {{usu.nombreUsuario}}:</h1></p>
+	
 	<div class="row">
 
 		<div class="column">
@@ -131,15 +132,18 @@ li a:hover:not(.active) {
 		{{/tarjeta}}
 		<br>
 		{{^tarjeta}}
-	    	<p><h2>No hay tarjetas todavía.</h2></p>
+	    	<p><h2>No hay ninguna lista todavía.</h2></p>
 		{{/tarjeta}}
-		
 		
 	</div>
 	
 	
-
-		
+	<form action="crearLista" method="post">
+	<p>Nombre de la lista: </p>
+	<p><input type= 'text' name= 'nombre'/></p>
+	<p><input type='submit' value= 'Nueva Lista'/></p>
+	</form>
+	
 </body>
 </html>
 

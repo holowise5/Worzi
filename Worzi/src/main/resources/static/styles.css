@@ -117,3 +117,12 @@ li a:hover:not(.active) {
 .botonVOLVER:hover {
   background-color: grey;
 }
+.contenido
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	padding-top: 10px;
+	font-size:20px;
+}

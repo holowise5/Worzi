@@ -1,121 +1,25 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<title>Worzi</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-	box-sizing: border-box;
-}
-
-body {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Float four columns side by side */
-.column {
-	float: left;
-	width: 25%;
-	padding: 0 10px;
-}
-
-/* Remove extra left and right margins, due to padding in columns */
-.row {
-	margin: 0 -5px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-	content: "";
-	display: table;
-	clear: both;
-}
-
-/* Style the counter cards */
-.card {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	/* this adds the "card" effect */
-	padding: 16px;
-	text-align: center;
-	background-color: #f1f1f1;
-	 
-}
-
-/* Responsive columns - one column layout (vertical) on small screens */
-@media screen and (max-width: 600px) {
-	.column {
-		width: 100%;
-		display: block;
-		margin-bottom: 20px;
-	}
-}
-.cardFondo {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	/* this adds the "card" effect */
-	padding: 16px;
-	text-align: center;
-	background-color: #f66c6c;
-	 
-}
-.Div1{
-	background-color: lightblue;
-    text-color: #000066;
-    text-align: center;
-    font-size: 20px;
-    font-family: Verdana, sans-serif;
-	padding: 1px;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #444;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover:not(.active) {
-  background-color: #3ca1c3;
-}
-
-.Activa {
-  background-color: lightblue;
-}
-
-
-</style>
-</head>
-<body>
-
-<div class="Div1">
-	<h1>Worzii</h1>
-</div>
-<ul>
-  <li><a class="Activa" href="#Inicio">Inicio</a></li>
-  <li><a href="#Tableros">Mis Tableros</a></li>
-  <li><a href="#Config">ConfiguraciÃ³n</a></li>
-  <li style="float:right"><a href="/perfil">Hola, {{usu.nombreUsuario}}</a></li>
-  <li style="float:right"><a href="/perfil">Perfil</a></li>
-  <li><a href="crearTarjeta">Crear tarjeta</a></li>
-  <li><a href="crearLista">Crear Lista</a></li>
-</ul>
-
+{{> cabecera}}
   
 	<p><h1>Tablero de {{usu.nombreUsuario}}:</h1></p>
 	
+	<div class="contenido">
+	
+	{{#tarjeta}}
+			<div class="card"><h1>{{tarjeta.nombre}}</h1></div>
+				
+			<div class="card">Fecha límite: {{tarjeta.fechaFin}}</div>
+			
+			<div class="card">Descripción: <br>{{tarjeta.descripcion}}</div>
+			
+			<div class="card"><button  class="cardFondo " style="color:black"><p>Borrar tarjeta</p></button></div>
+		</div>
+		{{/tarjeta}}
+		<br>
+		{{^tarjeta}}
+	    	<p><h2>No hay ninguna lista todavía.</h2></p>
+		{{/tarjeta}}
+	
+	<!--  
 	<div class="row">
 
 		<div class="column">
@@ -123,27 +27,28 @@ li a:hover:not(.active) {
 			{{#tarjeta}}
 			<div class="card"><h1>{{tarjeta.nombre}}</h1></div>
 				
-			<div class="card">Fecha lÃ­mite: {{tarjeta.fechaFin}}</div>
+			<div class="card">Fecha límite: {{tarjeta.fechaFin}}</div>
 			
-			<div class="card">DescripciÃ³n: <br>{{tarjeta.descripcion}}</div>
+			<div class="card">Descripción: <br>{{tarjeta.descripcion}}</div>
 			
 			<div class="card"><button  class="cardFondo " style="color:black"><p>Borrar tarjeta</p></button></div>
 		</div>
 		{{/tarjeta}}
 		<br>
 		{{^tarjeta}}
-	    	<p><h2>No hay ninguna lista todavÃ­a.</h2></p>
+	    	<p><h2>No hay ninguna lista todavía.</h2></p>
 		{{/tarjeta}}
 		
 	</div>
+	
 	
 	
 	<form action="crearLista" method="post">
 	<p>Nombre de la lista: </p>
 	<p><input type= 'text' name= 'nombre'/></p>
 	<p><input type='submit' value= 'Nueva Lista'/></p>
-	</form>
-	
+	</form>-->
+	</div>
 </body>
 </html>
 

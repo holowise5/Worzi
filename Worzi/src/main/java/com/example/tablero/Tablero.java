@@ -42,6 +42,15 @@ public class Tablero {
 		super();
 	}
 	
+	public Tablero(String nombre) {
+		super();
+		this.nombre = nombre;
+		this.simple = true;
+		this.fondo = "";
+		this.descripcion = "";
+		this.listas = new ArrayList<Lista>();
+	}
+	
 	public Tablero(String nombre, Usuario creador) {
 		super();
 		this.nombre = nombre;

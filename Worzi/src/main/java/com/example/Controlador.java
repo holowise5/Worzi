@@ -18,6 +18,9 @@ import com.example.tarjeta.TarjetaRepository;
 import com.example.usuario.Usuario;
 import com.example.usuario.UsuarioRepository;
 
+import aplicacion.Actividad;
+import aplicacion.Reserva;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,12 +41,35 @@ public class Controlador {
 	@Autowired
 	private ListaRepository listaRepository;
 	@Autowired
-	TarjetaRepository tarjetaRepository;
+	private TarjetaRepository tarjetaRepository;
 
+	
+	@GetMapping("/")
+	public String main() {
+
+		return "pagSesion";
+	}
+	
 	@GetMapping("/registrarse")
 	public String registrarse()
 	{
 		return "registrarse";
+	}
+	
+	@PostMapping("/nuevoUsuario")
+	public String registrarse(Model model, @RequestParam String nombreUsuario,
+			@RequestParam String email, @RequestParam String contrasenya) {
+
+		Usuario usuario = new Usuario(nombreUsuario, email, contrasenya);
+		usuarioRepository.save(usuario);
+		usuarioActual = usuario.getId();
+		model.addAttribute("usu", usuario);
+		model.addAttribute("nombreUsuario", usuario.getNombreUsuario());
+			
+		Tablero t = new Tablero("Tablero1", usuario);
+		usuario.addTablero(t);
+		tableroRepository.save(t);
+		return "main";
 	}
 
 	@GetMapping("/iniciarSesion")
@@ -52,7 +78,7 @@ public class Controlador {
 		return "iniciarSesion";
 	}
 	
-	@PostMapping("/usuario/acceso")
+	@PostMapping("/usuarioAcceso")
 	public String iniciarSesion(Model model, Usuario usuario, HttpSession sesion)
 	{
 		/*
@@ -79,8 +105,8 @@ public class Controlador {
 	}
 
 	@GetMapping("/perfil")
-	public String userProfileView(Model model) {
-		String username = "";
+	public String userProfileView(Model model, HttpSession sesion) {
+		/*String username = "";
 		
 		Optional<Usuario> opt = usuarioRepository.findById(usuarioActual);
 		if(opt.isPresent()) {
@@ -91,28 +117,17 @@ public class Controlador {
 		model.addAttribute("usuario", username);
 
 		// prueba
-		List<Usuario> usuarioActual = usuarioRepository.findAll();
-		model.addAttribute("usuario", usuarioActual);
-
+		//List<Usuario> usuarioActual = usuarioRepository.findAll();
+		model.addAttribute("usuario", usuarioActual);*/
+		
+		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
+		String nombre = usuarioActual.getNombreUsuario();
+		//model.addAttribute("usuario", usuarioActual);
+		model.addAttribute("nombre", nombre);
 		return "miPerfil";
 	}
 
-	@PostMapping("/nuevoUsuario")
-	public String registrarse(Model model, @RequestParam String nombreUsuario,
-			@RequestParam String email, @RequestParam String contrasenya) {
-
-		Usuario usuario = new Usuario(nombreUsuario, email, contrasenya);
-		usuarioRepository.save(usuario);
-		usuarioActual = usuario.getId();
-		model.addAttribute("usu", usuario);
-		model.addAttribute("nombreUsuario", usuario.getNombreUsuario());
-			
-		Tablero t = new Tablero("Tablero1", usuario);
-		usuario.addTablero(t);
-		tableroRepository.save(t);
-		return "main";
-	}
-
+/*
 	@PostMapping("/crearLista")
 	public String crearLista(Model model, @RequestParam String nombre) {
 	
@@ -123,18 +138,18 @@ public class Controlador {
 		model.addAttribute("listasGlobal", listasGlobal);
 		
 		return "main";
-	}
+	}*/
 	
-	@GetMapping("/crearTarjeta")
+	@GetMapping("/crearTablero")
 	public String verTarjeta(Model model) {
-		return "GetTarjeta";
+		return "GetTablero";
 	}
 
-	@PostMapping("/Tarjeta")
-	public String addTarjeta(Model model, @RequestParam String nombre,
+	@PostMapping("/Tablero")
+	public String addTablero(Model model, @RequestParam String nombre,
 			@RequestParam(required=false) String fechaFin , @RequestParam(required=false) String descripcion) {
 
-		model.addAttribute("nombre", nombre);
+		/*model.addAttribute("nombre", nombre);
 		model.addAttribute("fecha", fechaFin);
 		model.addAttribute("descripcion", descripcion);
 		
@@ -147,14 +162,74 @@ public class Controlador {
 		List<Tarjeta> tar = tarjetaRepository.findByNombre(nombre);
 		model.addAttribute("tarjeta", tar);
 
-		// model.addAttribute("lista", lista);
+		// model.addAttribute("lista", lista);*/
+		
+		Tablero tablero = new Tablero(nombre);
+		usuarioActual.setTableros(tablero);
+		List<Lista> act = tableroRepository.save(tablero);
+
+		return "main";
+	}
+	
+	@GetMapping("/crearLista")
+	public String crearLista(Model model) {
+		return "GetLista";
+	}
+
+	@PostMapping("/Lista")
+	public String addLista(Model model, @RequestParam String nombre,
+			@RequestParam(required=false) String fechaFin , @RequestParam(required=false) String descripcion) {
+
+		/*model.addAttribute("nombre", nombre);
+		model.addAttribute("fecha", fechaFin);
+		model.addAttribute("descripcion", descripcion);
+		
+		Lista lista = new Lista("Lista "+numeroLista);
+		Tarjeta t = new Tarjeta(nombre, fechaFin, descripcion);
+
+		model.addAttribute("tarjeta", t);
+		lista.addTarjeta(t);
+
+		List<Tarjeta> tar = tarjetaRepository.findByNombre(nombre);
+		model.addAttribute("tarjeta", tar);
+
+		// model.addAttribute("lista", lista);*/
+		
+		Tarjeta tarjeta = new Tarjeta(nombre,fechaFin,descripcion);
+		model.addAttribute("tarjeta", tarjeta);
+
+		return "main";
+	}
+	
+	
+	@GetMapping("/crearTarjeta")
+	public String crearTarjeta(Model model) {
+		return "GetTarjeta";
+	}
+
+	@PostMapping("/Tarjeta")
+	public String addTarjeta(Model model, @RequestParam String nombre,
+			@RequestParam(required=false) String fechaFin , @RequestParam(required=false) String descripcion) {
+
+		/*model.addAttribute("nombre", nombre);
+		model.addAttribute("fecha", fechaFin);
+		model.addAttribute("descripcion", descripcion);
+		
+		Lista lista = new Lista("Lista "+numeroLista);
+		Tarjeta t = new Tarjeta(nombre, fechaFin, descripcion);
+
+		model.addAttribute("tarjeta", t);
+		lista.addTarjeta(t);
+
+		List<Tarjeta> tar = tarjetaRepository.findByNombre(nombre);
+		model.addAttribute("tarjeta", tar);
+
+		// model.addAttribute("lista", lista);*/
+		
+		Tarjeta tarjeta = new Tarjeta(nombre,fechaFin,descripcion);
+		model.addAttribute("tarjeta", tarjeta);
 
 		return "main";
 	}
 
-	@GetMapping("/")
-	public String main(Model model) {
-
-		return "pagSesion";
-	}
 }

@@ -1,35 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<title>Worzi</title>
-<link rel="stylesheet" href="/styles.css">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-</head>
-<body>
-
-	<div class="Div1">
-		<h1>Worzi</h1>
-	</div>
-	<ul>
-		<li><a class="Activa" href="#Inicio">Inicio</a></li>
-		<li><a href="#Tableros">Mis Tableros</a></li>
-		<li><a href="#Config">Configuración</a></li>
-		<li style="float: right"><a href="/perfil">Perfil</a></li>
-		<li><a href="crearTarjeta">Crear tarjeta</a></li>
-		<li><a href="crearTarjeta">Crear Lista</a></li>
-	</ul>
-
-
-
+{{> cabecera}}
 
 	<div class="wrapper">
 
 		<div class="contenido">
 
-			<h1>Bienvenido a tu perfil {{usuario.nombre}}</h1>
-			<a href="/"><button>Volver</button></a>
+			<h1>Bienvenido a tu perfil {{nombre}}</h1>
+			<a href="/main"><button>Volver</button></a>
 		</div>
 
 	</div>

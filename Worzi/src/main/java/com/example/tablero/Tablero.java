@@ -38,9 +38,8 @@ public class Tablero {
 	private List<Lista> listas;
 	 
 	//Constructor
-	public Tablero(long id, String nombre, boolean simple, String fondo, String descripcion, Usuario creador) {
+	public Tablero(String nombre, boolean simple, String fondo, String descripcion, Usuario creador) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.simple = simple;
 		this.fondo = fondo;
@@ -129,16 +128,9 @@ public class Tablero {
 	
 	// Para tableros con varias listas,
 	// este metodo permite cambiar una tarjeta de una lista a otra.
-	// Devuelve false si no lo ha conseguido
-	public boolean moveTarjeta(Tarjeta t, Lista destino) {
-	
-		Lista origen = t.getListaAsociada();
+	public void moveTarjeta(Tarjeta t, Lista origen, Lista destino) {
 		origen.removeTarjeta(t);
-		t.cambiarLista(destino);
 		destino.addTarjeta(t);
-		
-		
-		return false;
 	}
 	
 	

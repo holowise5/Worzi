@@ -13,7 +13,7 @@ import java.util.List;
 public class ListaController {
 
     @Autowired
-    private ListaRepository usuarioRepository;
+    private ListaRepository listaRepository;
 
   
 }

@@ -1,7 +1,10 @@
 package com.example;
 
+import com.example.lista.Lista;
 import com.example.lista.ListaRepository;
+import com.example.tablero.Tablero;
 import com.example.tablero.TableroRepository;
+import com.example.tarjeta.Tarjeta;
 import com.example.tarjeta.TarjetaRepository;
 import com.example.usuario.Usuario;
 import com.example.usuario.UsuarioRepository;
@@ -21,10 +24,10 @@ public class DatabaseUsage implements CommandLineRunner {
     private TableroRepository tableroRepository;
 
     @Autowired
-    private ListaRepository resenaRepository;
+    private ListaRepository listaRepository;
     
     @Autowired
-	private TarjetaRepository pedidoRepository;
+	private TarjetaRepository tarjetaRepository;
 
    
 
@@ -41,8 +44,24 @@ public class DatabaseUsage implements CommandLineRunner {
         usuarioRepository.save(u3);
 
         // CREAR AQUI UN TABLERO PARA CADA USUARIO CON 1 LISTA DE VARIAS TARJETAS
-        
-        
+        Tablero tU1 = new Tablero("Tablero lista compra Usuario1", true, "fondo.jpg", "Lista de la compra", u1);
+        Lista lU1 = new Lista("Lista compra Mercadona");
+        Tarjeta t1 = new Tarjeta("Arroz");
+        Tarjeta t2 = new Tarjeta("Pollo");
+        Tarjeta t3 = new Tarjeta("Patatas");
+        lU1.addTarjeta(t1);
+        lU1.addTarjeta(t2);
+        lU1.addTarjeta(t3);
+        tU1.addLista(lU1);        
+        u1.addTablero(tU1);
+/*        
+        usuarioRepository.save(u1);
+        tableroRepository.save(tU1);
+        listaRepository.save(lU1);
+        tarjetaRepository.save(t1);
+        tarjetaRepository.save(t2);
+        tarjetaRepository.save(t3);
+*/
 /*
         Producto p1 = new Producto("Barras paralelas", "Crossfit", 40.5F, 5,
                 "Barras paralelas",

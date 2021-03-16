@@ -22,47 +22,35 @@ public class Tarjeta {
     private String fechaFin;
     private String color;
     private String descripcion;
-    private int posicion; // Orden en la lista, se podrá cambiar
-  
-    @ManyToOne
-    private Lista listaAsociada;
 
     // Constructores
-	public Tarjeta(String nombre, String fecha, String color, String descripcion, Lista lista) {
+	public Tarjeta(String nombre, String fecha, String color, String descripcion) {
 		super();
 		this.nombre = nombre;
 		this.fechaFin = fecha;
 		this.color = color;
 		this.descripcion = descripcion;
-		this.listaAsociada = lista;
-		this.posicion = lista.size(); //Posicion en la lista, si estaba vacia, toma la posicion 0. Si tenía 2 elementos, toma la posicion 2.
 	}
-	public Tarjeta(String nombre, String fecha, String descripcion, Lista lista) {
+	public Tarjeta(String nombre, String fecha, String descripcion) {
 		super();
 		this.nombre = nombre;
 		this.fechaFin = fecha;
 		this.color = "Blanco";
 		this.descripcion = descripcion;
-		this.listaAsociada = lista;
-		this.posicion = lista.size();
 	}
-	public Tarjeta(String nombre, String fecha, Lista lista) {
+	public Tarjeta(String nombre, String fecha) {
 		super();
 		this.nombre = nombre;
 		this.fechaFin = fecha;
 		this.color = "Blanco";
 		this.descripcion = "";
-		this.listaAsociada = lista;
-		this.posicion = lista.size();
 	}
-	public Tarjeta(String nombre, Lista lista) {
+	public Tarjeta(String nombre) {
 		super();
 		this.nombre = nombre;
 		this.fechaFin = "";
 		this.color = "Blanco";
 		this.descripcion = "";
-		this.listaAsociada = lista;
-		this.posicion = lista.size();
 	}
 	
 	public String getNombre() {
@@ -96,22 +84,5 @@ public class Tarjeta {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	public int getPosicion() {
-		return this.posicion;
-	}
-	
-	// HACER UN METODO QUE PERMITA CAMBIAR LA POSICION EN LA LISTA
-	// COMPROBANDO QUE NO ES UNA POSICION INEXISTENTE: COMPROBAR TAMAÑO LISTA
-	
-	public Lista getListaAsociada() {
-		return listaAsociada;
-	}
-	
-	public void cambiarLista(Lista destino) {
-		this.listaAsociada = destino;
-	}
-	
-	
     
 }

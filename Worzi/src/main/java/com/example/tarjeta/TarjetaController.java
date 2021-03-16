@@ -40,7 +40,7 @@ int numeroLista = 1;
 	        model.addAttribute("fecha", fechaFin);
 	        model.addAttribute("descripcion", descripcion);
 	        Lista lista = new Lista("Lista "+numeroLista);
-	        Tarjeta t = new Tarjeta(nombre, fechaFin, descripcion, lista);
+	        Tarjeta t = new Tarjeta(nombre, fechaFin, descripcion);
 	       
 	       model.addAttribute("tarjeta", t);
 	       lista.addTarjeta(t);

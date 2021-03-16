@@ -31,6 +31,7 @@ public class Usuario {
 	
 	// Constructores
 	public Usuario(String nombreUsuario, String email, String contrasenya) {
+		super();
 		this.nombreUsuario = nombreUsuario;
 		this.email = email;
 		this.contrasenya = contrasenya;
@@ -39,6 +40,7 @@ public class Usuario {
 	}
 	
 	public Usuario(String nombreUsuario, String email, String contrasenya, boolean admin) {
+		super();
 		this.nombreUsuario = nombreUsuario;
 		this.email = email;
 		this.contrasenya = contrasenya;

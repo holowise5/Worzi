@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
  
-public class CaWaStoreApplication {
+public class WorziApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CaWaStoreApplication.class, args);
+		SpringApplication.run(WorziApplication.class, args);
 	}
 
 }

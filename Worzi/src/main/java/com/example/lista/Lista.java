@@ -16,9 +16,9 @@ public class Lista {
     
     private String nombre;
     
-    // Relacion bidireccional: las tarjetas van a saber a qué lista pertenecen,
-    // para poderlas mover de una lista a otra pinchando en la tarjeta
- 	@OneToMany(mappedBy = "listaAsociada", cascade = CascadeType.ALL, orphanRemoval = true)
+    // Relacion unidireccional: las tarjetas NO van a saber a qué lista pertenecen,
+    // eso lo pueden gestionar las clases Lista y Tablero.
+ 	@OneToMany(orphanRemoval = true)
     private List<Tarjeta> tarjetas;
      
  	

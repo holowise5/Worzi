@@ -107,7 +107,7 @@ li a:hover:not(.active) {
   <li><a class="Activa" href="#Inicio">Inicio</a></li>
   <li><a href="#Tableros">Mis Tableros</a></li>
   <li><a href="#Config">Configuración</a></li>
-  <li style="float:right"><a href="#Perfil">Perfil</a></li>
+  <li style="float:right"><a href="/perfil">Perfil</a></li>
   <li><a href="crearTarjeta">Crear tarjeta</a></li>
   <li><a href="crearTarjeta">Crear Lista</a></li>
 </ul>
@@ -130,6 +130,9 @@ li a:hover:not(.active) {
 		</div>
 		{{/tarjeta}}
 		<br>
+		{{^tarjeta}}
+	    	<p><h2>No hay tarjetas todavía.</h2></p>
+		{{/tarjeta}}
 		
 		
 	</div>

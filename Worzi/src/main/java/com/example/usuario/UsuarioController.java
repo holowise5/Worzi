@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import java.util.List;
 
 @Controller
@@ -15,6 +16,18 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
+    @GetMapping("/registrarse")
+	public String registrarse()
+	{
+		return "registrarse";
+	}
+	
+	@GetMapping("/iniciarSesion")
+	public String iniciarSesion()
+	{
+		return "iniciarSesion";
+	}
 
     @GetMapping("/perfil")
     public String userProfileView(Model model) {
@@ -22,7 +35,12 @@ public class UsuarioController {
         List<Usuario> users = usuarioRepository.findAll();
         Usuario user = users.get(0);
         model.addAttribute("usuario", user);
-        return "perfil_usuario";
+        
+        // prueba
+        List<Usuario> usuarioActual = usuarioRepository.findAll();
+        model.addAttribute("usuario", usuarioActual);
+        
+        return "miPerfil";
     }
 
     @PostMapping("/nuevoUsuario")
@@ -33,6 +51,6 @@ public class UsuarioController {
         usuarioRepository.save(usuario);
         model.addAttribute("nombreUsuario", usuario.getNombreUsuario());
 
-        return "registrado";
+        return "main";
     }
 }

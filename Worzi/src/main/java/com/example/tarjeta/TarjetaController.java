@@ -1,6 +1,5 @@
 package com.example.tarjeta;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +13,17 @@ import com.example.lista.Lista;
 import com.example.lista.ListaRepository;
 
 
+
+
 @Controller
 public class TarjetaController {
 int numeroLista = 1;
+
     @Autowired
     private ListaRepository listaRepository;
  
-
+    @Autowired
+    TarjetaRepository tarjetaRepository;
     
     
     
@@ -45,7 +48,9 @@ int numeroLista = 1;
 	       model.addAttribute("tarjeta", t);
 	       lista.addTarjeta(t);
 	       
-	 
+	       List<Tarjeta> tar = tarjetaRepository.findByNombre(nombre);
+	       model.addAttribute("tarjeta", tar);
+	       
 	       // model.addAttribute("lista", lista);
 	      
 	        return "main";
@@ -56,7 +61,7 @@ int numeroLista = 1;
 	    @GetMapping("/")
 	    public String main(Model model) {
 	    
-	        return "main";
+	        return "pagSesion";
 	    }
 	    
 	    

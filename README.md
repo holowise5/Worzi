@@ -17,7 +17,7 @@ Web application for time management and agile planning.
 
 - CLARA EUGENIA PALOMARES CALVO: 
 
-- ALEX PALOMO BARRADO:
+- ALEX PALOMO BARRADO: a.palomo.2019@alumnos.urjc.es // https://github.com/holowise5
 
 
 

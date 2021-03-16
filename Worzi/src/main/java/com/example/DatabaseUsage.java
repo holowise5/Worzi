@@ -1,23 +1,14 @@
 package com.example;
 
-import com.example.pedido.Pedido;
-import com.example.pedido.PedidoRepository;
-import com.example.producto.Producto;
-import com.example.producto.ProductoRepository;
-import com.example.promocion.Promocion;
-import com.example.promocion.PromocionRepository;
-import com.example.resena.Resena;
-import com.example.resena.ResenaRepository;
+import com.example.lista.ListaRepository;
+import com.example.tablero.TableroRepository;
+import com.example.tarjeta.TarjetaRepository;
 import com.example.usuario.Usuario;
 import com.example.usuario.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
-
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class DatabaseUsage implements CommandLineRunner {
@@ -27,31 +18,32 @@ public class DatabaseUsage implements CommandLineRunner {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private ProductoRepository productoRepository;
+    private TableroRepository tableroRepository;
 
     @Autowired
-    private ResenaRepository resenaRepository;
+    private ListaRepository resenaRepository;
     
     @Autowired
-	private PedidoRepository pedidoRepository;
-	 
-    @Autowired
-    private PromocionRepository promocionRepository;
+	private TarjetaRepository pedidoRepository;
 
    
 
     @Override
     public void run(String... args) throws Exception {
 
-        Usuario u1 = new Usuario("joseAngel", "jose@hola.com", "12345678");
-        Usuario u2 = new Usuario("gonzalo", "gonzalo@hola.com", "12345678");
+        Usuario u1 = new Usuario("joseAngel", "jose@hola.com", "password");
+        Usuario u2 = new Usuario("gonzalo", "gonzalo@hola.com", "password");
+        Usuario u3 = new Usuario("Admin", "admin@hola.com", "password", true); // El true es para distinguirlo como admin.
        
 
         usuarioRepository.save(u1);
         usuarioRepository.save(u2);
-       
+        usuarioRepository.save(u3);
 
-
+        // CREAR AQUI UN TABLERO PARA CADA USUARIO CON 1 LISTA DE VARIAS TARJETAS
+        
+        
+/*
         Producto p1 = new Producto("Barras paralelas", "Crossfit", 40.5F, 5,
                 "Barras paralelas",
                 "https://contents.mediadecathlon.com/p1103588/k$5cc7c279f32cbbd44a5abc4ab065cd54/sq/Barras+paralelas+para+dips+cross+training+musculaci+n+training+station+100.jpg");
@@ -71,7 +63,7 @@ public class DatabaseUsage implements CommandLineRunner {
         Producto p5 = new Producto("Muñequera", "Material Crossfit", 5.0F, 5,
                 "Muñequeras capaces de mantener rigidez en la muñeca para ejercicios de pino o barra",
                 "https://contents.mediadecathlon.com/p1748366/k$2313dfd5c5758634ef14b43b1f2fa52b/sq/MU+EQUERAS+MUSCULACI+N+CROSSTRAINING+AZUL.jpg");
-        
+       
         
 
         
@@ -121,8 +113,8 @@ public class DatabaseUsage implements CommandLineRunner {
         pr1.setProducto(p3);
 
         promocionRepository.save(pr1);
- 
-} 
+*/ 
+    } 
 }
 
        
